@@ -1,0 +1,14 @@
+{
+  "name": "transition",
+  "version":"1.0.0",
+  "desc": "基于 3D Transform 的 Mobile First 的页面切换组件",
+  "cover": "",
+  "tag":"animation,transition,slide,fade,flip",
+  "author": {
+    "name": "云旷",
+    "email": "samuel.fy@alibaba-inc.com",
+    "page": ""
+  },
+  "type": "kissy-gallery",
+  "type-url": "http://gallery.kissyui.com/guide"
+}

@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Transition的demo</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.2/seed-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+    <link href="../build/transition.css" rel="stylesheet">
+    <style>
+        body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .viewContainer {
+            position: relative;
+            height: 440px;
+        }
+
+        .view {
+            height: 440px;
+            background-color: #eee;
+        }
+
+        .view-num {
+            padding: 7px 20px;
+            font-size: 3em;
+        }
+
+        .menu {
+            padding: 0;
+        }
+        .menu-item {
+            list-style-type: none;
+            border: 1px solid #ccc;
+            background-image: linear-gradient(#FFF, #F1F1F1);
+            padding: 10px;
+            font-size: 2em;
+        }
+        .menu-item:hover {
+            background-image: linear-gradient(#444 , #2D2D2D);
+            color: #DDD;
+            cursor: pointer;
+        }
+        .btnGroup {
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+        }
+        .btnAnimationType {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="viewContainer">
+    <div id="view1" class="view mb-anim-view-active mb-anim-view">
+        <div class="view-num">1</div>
+        <ul class="menu">
+            <li class="menu-item">Lorem ipsum dolor.</li>
+            <li class="menu-item">Ratione, totam, voluptatem!</li>
+            <li class="menu-item">Dolore nisi, ut.</li>
+            <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
+            <li class="menu-item">Doloremque, ipsum, possimus.</li>
+        </ul>
+    </div>
+    <div id="view2" class="view mb-anim-view">
+        <div class="view-num">2</div>
+        <ul class="menu">
+            <li class="menu-item">Lorem ipsum dolor.</li>
+            <li class="menu-item">Ratione, totam, voluptatem!</li>
+            <li class="menu-item">Dolore nisi, ut.</li>
+            <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
+            <li class="menu-item">Doloremque, ipsum, possimus.</li>
+        </ul>
+    </div>
+    <div id="view3" class="view mb-anim-view">
+        <div class="view-num">3</div>
+        <ul class="menu">
+            <li class="menu-item">Lorem ipsum dolor.</li>
+            <li class="menu-item">Ratione, totam, voluptatem!</li>
+            <li class="menu-item">Dolore nisi, ut.</li>
+            <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
+            <li class="menu-item">Doloremque, ipsum, possimus.</li>
+        </ul>
+    </div>
+    <div class="btnGroup">
+        <input type="radio" class="btnAnimationType" name="animationType" value="slide">slide
+        <input type="radio" class="btnAnimationType" name="animationType" value="fade">fade
+        <input type="radio" class="btnAnimationType" name="animationType" value="flip">flip
+        <button id="btnNext">next</button>
+        <button id="btnPrev">prev</button>
+    </div>
+</div>
+<script>
+    var S = KISSY;
+    S.config({
+        packages: [
+            {
+                name: "kg",
+                path: "http://g.tbcdn.cn/kg/",
+                charset: "utf-8",
+                ignorePackageNameInUri: true
+            }
+        ]/*,
+        debug: true*/
+    });
+
+    if (S.Config.debug) {
+        var srcPath = "../";
+        S.config({
+            packages: [
+                {
+                    name: "kg/transition/1.0.0",
+                    path: srcPath,
+                    charset: "utf-8",
+                    ignorePackageNameInUri: true
+                }
+            ]
+        });
+    }
+
+    S.use('kg/transition/1.0.0/index,event', function (S, Transition, Event) {
+        var view1 = document.getElementById('view1');
+        var view2 = document.getElementById('view2');
+        var view3 = document.getElementById('view3');
+
+        var transition = new Transition();
+        var animationType = 'slide';
+        var curViewIdx = 0;
+        var nextViewIdx;
+        var selectors = ['#view1', '#view2', '#view3'];
+
+        function getAnimType() {
+            var radios = document.getElementsByName('animationType');
+            var value;
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].type === 'radio' && radios[i].checked) {
+                    value = radios[i].value;
+                    return value || 'slide';
+                }
+            }
+            return 'slide';
+        }
+
+        document.querySelector('#btnNext').onclick = function () {
+
+            animationType = getAnimType();
+
+            // 须加此判断，否切换过快会出现问题
+            if (transition.isTransitioning) {
+                console.log('isTransitioning');
+                return;
+            }
+            if (curViewIdx === selectors.length - 1) {
+                nextViewIdx = 0;
+            } else {
+                nextViewIdx = curViewIdx + 1;
+            }
+            location.assign(location.href.replace(/#.*$/, '') + '#' + selectors[curViewIdx] + '/' + selectors[nextViewIdx]);
+
+            curViewIdx = (curViewIdx + 1) % selectors.length;
+        };
+        document.querySelector('#btnPrev').onclick = function () {
+
+            animationType = getAnimType();
+
+            // 必须加此判断，否切换过快会出现问题
+            if (transition.isTransitioning) {
+                console.log('isTransitioning');
+                return;
+            }
+            if (curViewIdx === 0) {
+                curViewIdx = 2;
+                nextViewIdx = 0;
+            } else {
+                curViewIdx--;
+                nextViewIdx = curViewIdx + 1;
+            }
+
+            location.assign(location.href.replace(/#.*$/, '') + '#reverse-' + selectors[curViewIdx] + '/' + selectors[nextViewIdx]);
+        };
+
+        Event.on(window, 'hashchange', function (e) {
+            var m = location.hash.match(/^#(reverse-)?([^\/]+)\/([^\/]+)$/);
+            m || console.log(m);
+            animationType = getAnimType();
+
+            m && transition.transition({
+                transition: animationType,
+                fromView: m[2],
+                toView: m[3],
+                container: '.viewContainer',
+                reverse: m[1]
+            });
+        });
+    })
+</script>
+</body>
+</html>
