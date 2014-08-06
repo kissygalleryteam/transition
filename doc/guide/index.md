@@ -11,7 +11,9 @@ S.use('kg/transition/1.0.0/index', function (S, Transition) {
 ```
 
 ## API说明
-可以参见 [demo](../demo/index.html) 里的例子。具体的使用方法如下  
+可以参见 [demo](../demo/index.html) 里的例子。注：demo 里绑定了 Kissy 提供的 `tap` 事件（Mobile first），建议在手机端，或 chrome 模拟手机使用
+
+具体的使用方法如下  
 
 在使用前需要在要切换的 view 上加上特定的 class：每个 view 都需要添加 `mb-anim-view`，当前处于视口内可见的 view 还需要添加 `mb-anim-view-active` class
 
