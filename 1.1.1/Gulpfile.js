@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 gulp.task('css', function () {
     return gulp.src('./src/stylus/transition.styl')
         .pipe(stylus())
-        .pipe(prefixer('ff 20', 'ios 5'))
+        .pipe(prefixer())
         .pipe(gulp.dest('./build'))
         .pipe(rename({suffix: '-min'}))
         .pipe(minifyCSS({keepBreaks:true}))

@@ -1,43 +1,46 @@
 .mb-slide.out
 .mb-slide.in {
 	animation-timing-function: ease;
-	animation-duration: 350ms;
-  animation-fill-mode: both;
+	animation-duration: 300ms;
 }
 .mb-slide.out {
+	transform: translateX(-100%);
 	animation-name: slideouttoleft;
 }
 
 .mb-slide.in {
+	transform: translateX(0);
 	animation-name: slideinfromright;
 }
 
 .mb-slide.out.reverse {
+	transform: translateX(100%);
 	animation-name: slideouttoright;
 }
 
 .mb-slide.in.reverse {
+	transform: translateX(0);
 	animation-name: slideinfromleft;
 }
  
 /* slide in */
 @keyframes slideinfromright {
-  from { transform: translate3d(100%,0,0); }
-  to { transform: translate3d(0,0,0); }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
 @keyframes slideinfromleft {
-  from { transform: translate3d(-100%,0,0); }
-  to { transform: translate3d(0,0,0); }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 /* slide out */
 @keyframes slideouttoleft {
-  from { transform: translate3d(0,0,0); }
-  to { transform: translate3d(-100%,0,0); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
 @keyframes slideouttoright {
-  from { transform: translate3d(0,0,0); }
-  to { transform: translate3d(100%,0,0); }
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
 }
