@@ -5,6 +5,7 @@
 KISSY.add(function (S, DOM, Event) {
 
     var animationEndEventName = getVendorPrefix() === '-webkit-' ? 'webkitAnimationEnd' : 'animationend';
+    var transitionEndEventName = getVendorPrefix() === '-webkit-' ? 'webkitTransitionEnd' : 'transitionend';
 
     function Transition() {
         if (!(this instanceof Transition)) {

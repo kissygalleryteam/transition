@@ -5,7 +5,7 @@
     <title>Transition的demo</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <meta content="yes" name="apple-mobile-web-app-capable"/>
-    <script src="http://g.tbcdn.cn/kissy/k/1.4.2/seed-min.js" charset="utf-8"></script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.4/seed-min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
     <link href="../build/transition.css" rel="stylesheet">
     <style>
@@ -23,22 +23,27 @@
 
         .view {
             height: 440px;
-            background-color: #eee;
+            color: #e8e8e8;
         }
 
         .view-num {
             padding: 7px 20px;
+            background-color: #56A00E;
+            background-image: linear-gradient(#74B042, #56A00E);
             font-size: 3em;
         }
 
         .menu {
+            margin: 0;
             padding: 0;
+            border-top: 1px solid #ccc;
         }
         .menu-item {
             list-style-type: none;
-            border: 1px solid #ccc;
-            background-image: linear-gradient(#FFF, #F1F1F1);
-            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #333;
+            background-image: linear-gradient(#333, #444);
+            padding: 10px 20px;
             font-size: 2em;
         }
         .menu-item:hover {
@@ -52,6 +57,35 @@
         .btnAnimationType {
             margin-right: 5px;
         }
+        input[type=radio].css-checkbox {
+            display:none;
+        }
+
+        input[type=radio].css-checkbox + label.css-label {
+            padding-left:26px;
+            height:21px;
+            display:inline-block;
+            line-height:21px;
+            background-repeat:no-repeat;
+            background-position: 0 0;
+            font-size:21px;
+            vertical-align:middle;
+            cursor:pointer;
+
+        }
+
+        input[type=radio].css-checkbox:checked + label.css-label {
+            background-position: 0 -21px;
+        }
+        label.css-label {
+            background-image:url(./resource/img/csscheckbox.png);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
         .mblScrollableViewContainer {
             margin-top: 120px;
         }
@@ -60,13 +94,13 @@
 <body>
 <div class="viewContainer">
     <div id="view1" class="view mb-anim-view-active mb-anim-view">
-        <div class="view-num">1</div>
+        <div class="view-num">View#1</div>
         <ul class="menu">
             <li class="menu-item next">Next</li>
             <li class="menu-item prev">Prev</li>
-            <li class="menu-item">Dolore nisi, ut.</li>
-            <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
-            <li class="menu-item">Doloremque, ipsum, possimus.</li>
+            <li class="menu-item">Below is some useless</li>
+            <li class="menu-item">elements just to make the DOM more complex</li>
+            <li class="menu-item">for performance test</li>
             <div>
                 <div class="mblScrollableViewContainer">
                     <h2 dojotype="dojox.mobile.RoundRectCategory" class="mblRoundRectCategory" id="dojox_mobile_RoundRectCategory_1" widgetid="dojox_mobile_RoundRectCategory_1">Nothing to do, just make the dom more complex for test</h2>
@@ -137,10 +171,10 @@
         </ul>
     </div>
     <div id="view2" class="view mb-anim-view">
-        <div class="view-num">2</div>
+        <div class="view-num">View#2</div>
         <ul class="menu">
-            <li class="menu-item next">Next2</li>
-            <li class="menu-item prev">Prev2</li>
+            <li class="menu-item next">Next</li>
+            <li class="menu-item prev">Prev</li>
             <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
             <li class="menu-item">Dolore nisi, ut.</li>
             <li class="menu-item">Doloremque, ipsum, possimus.</li>
@@ -214,10 +248,10 @@
         </ul>
     </div>
     <div id="view3" class="view mb-anim-view">
-        <div class="view-num">3</div>
+        <div class="view-num">View#3</div>
         <ul class="menu">
-            <li class="menu-item next">Next3</li>
-            <li class="menu-item prev">Prev3</li>
+            <li class="menu-item next">Next</li>
+            <li class="menu-item prev">Prev</li>
             <li class="menu-item">Doloremque, ipsum, possimus.</li>
             <li class="menu-item">Necessitatibus, numquam, veritatis.</li>
             <li class="menu-item">Dolore nisi, ut.</li>
@@ -291,9 +325,12 @@
         </ul>
     </div>
     <div class="btnGroup">
-        <input type="radio" class="btnAnimationType" name="animationType" value="slide" checked>slide
-        <input type="radio" class="btnAnimationType" name="animationType" value="fade">fade
-        <input type="radio" class="btnAnimationType" name="animationType" value="flip">flip
+        <input type="radio" class="btnAnimationType css-checkbox" id="radioSlide" name="animationType" value="slide" checked/>
+        <label for="radioSlide" class="css-label radGroup1">Slide</label>
+        <input type="radio" id="radioFade" class="btnAnimationType css-checkbox" name="animationType" value="fade" />
+        <label for="radioFade" class="css-label radGroup1">Fade</label>
+        <input type="radio" id="radioFlip" class="btnAnimationType css-checkbox" name="animationType" value="flip" />
+        <label for="radioFlip" class="css-label radGroup1">Flip</label>
     </div>
 </div>
 <script>
