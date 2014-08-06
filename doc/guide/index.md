@@ -11,7 +11,7 @@ S.use('kg/transition/1.0.0/index', function (S, Transition) {
 ```
 
 ## API说明
-可以参见 [demo](http://gallery.kissyui.com/transition/1.0.0/demo/index.html) 里的例子。具体的使用方法如下
+可以参见 [demo](../demo/index.html) 里的例子。具体的使用方法如下
 
 ```
 var transition = new transition();
