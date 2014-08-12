@@ -1,0 +1,106 @@
+/* cover in */
+.mb-cover {
+  animation-timing-function: ease;
+  animation-duration: cover-duration;
+  animation-fill-mode: both;
+}
+.mb-cover.in {
+  animation-name: coverInFromRight;
+  z-index: 10;
+}
+.mb-cover.in.reverse {
+  animation-name: coverInFromLeft;
+}
+.mb-cover.out {
+  z-index: 1;
+}
+@-moz-keyframes coverInFromLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes coverInFromLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-o-keyframes coverInFromLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-ms-keyframes coverInFromLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes coverInFromLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-moz-keyframes coverInFromRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes coverInFromRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-o-keyframes coverInFromRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-ms-keyframes coverInFromRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes coverInFromRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

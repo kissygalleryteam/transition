@@ -4,8 +4,21 @@
  */
 KISSY.add(function (S, DOM, Event) {
 
-    var animationEndEventName = getVendorPrefix() === '-webkit-' ? 'webkitAnimationEnd' : 'animationend';
-    var transitionEndEventName = getVendorPrefix() === '-webkit-' ? 'webkitTransitionEnd' : 'transitionend';
+    function animationEnd() {
+        var transEndEventNames = {
+            // chrome safari opera
+            '-webkit-'  : 'webkitAnimationEnd',
+            '-moz-'     : 'animationend',
+            '-o-'       : 'oAnimationEnd animationend',
+            '-ms-'      : 'animationend',
+            ''          : 'animationend'
+        };
+
+        var vendorPrefix = getVendorPrefix();
+        return transEndEventNames[vendorPrefix];
+    }
+
+    var animationEndEventName = animationEnd();
 
     function Transition() {
         if (!(this instanceof Transition)) {
@@ -26,6 +39,7 @@ KISSY.add(function (S, DOM, Event) {
          * option.toView
          * option.reverse - just animate back
          * option.container - optional. It just takes effect when using flip animation
+         * option.showToViewDelay - optional, toView will be shown after fromView end its animation
          */
         transition: function (option) {
             var self = this;
@@ -40,7 +54,8 @@ KISSY.add(function (S, DOM, Event) {
             var fromView = DOM.get(option.fromView);
             var toView = DOM.get(option.toView);
             var reverse = !!option.reverse;
-
+            var showToViewDelay = option.showToViewDelay;    
+            
             // animation css class to force element display: block
             var viewActiveCls = 'mb-anim-view-active';
 
@@ -53,13 +68,30 @@ KISSY.add(function (S, DOM, Event) {
             // Add animation class to use css3 animation
             if (reverse) {
                 setTimeout(function () {
-                    addClasses(fromView, [getTransformCls('in', reverse), viewActiveCls]);
                     addClasses(toView, getTransformCls('out', reverse));
+                    if (showToViewDelay) {
+                        Event.on(toView, animationEndEventName, function (e) {
+                            DOM.removeClass(toView, viewActiveCls);
+                            addClasses(fromView, [getTransformCls('in', reverse), viewActiveCls]);
+                            Event.detach(toView, animationEndEventName);
+                        });
+                    } else {
+                        addClasses(fromView, [getTransformCls('in', reverse), viewActiveCls]);
+                    }
                 }, 0);
             } else {
                 setTimeout(function () {
                     addClasses(fromView, getTransformCls('out', reverse));
-                    addClasses(toView, [getTransformCls('in', reverse), viewActiveCls]);
+                    if (showToViewDelay) {
+                        Event.on(fromView, animationEndEventName, function (e) {
+                            DOM.removeClass(fromView, viewActiveCls);
+                            addClasses(toView, [getTransformCls('in', reverse), viewActiveCls]);
+                            Event.detach(fromView, animationEndEventName);
+                        });
+                    } else {
+                        addClasses(toView, [getTransformCls('in', reverse), viewActiveCls]);
+                    }
+                    
                 }, 0);
             }
 

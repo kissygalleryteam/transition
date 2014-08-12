@@ -1,0 +1,106 @@
+.mb-scaleY {
+  animation-fill-mode: both;
+  animation-duration: scale-duration;
+}
+.mb-scaleY.in {
+  animation-name: scaleYIn;
+}
+.mb-scaleY.in.reverse {
+  animation-name: scaleYIn;
+}
+.mb-scaleY.out {
+  animation-name: scaleYOut;
+}
+.mb-scaleY.out.reverse {
+  animation-name: scaleYOut;
+}
+@-moz-keyframes scaleYIn {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+@-webkit-keyframes scaleYIn {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+@-o-keyframes scaleYIn {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+@-ms-keyframes scaleYIn {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes scaleYIn {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+@-moz-keyframes scaleYOut {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+@-webkit-keyframes scaleYOut {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+@-o-keyframes scaleYOut {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+@-ms-keyframes scaleYOut {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+@keyframes scaleYOut {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}

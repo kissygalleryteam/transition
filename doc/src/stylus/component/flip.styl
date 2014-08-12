@@ -5,17 +5,16 @@
 .mb-flip {
 	backface-visibility: hidden;
 	transform: translateX(0);
+  animation-duration: flip-duration
 }
 
 .mb-flip.out {
 	transform: rotateY(-180deg);
 	animation-name: flipouttoleft;
-	animation-duration: 500ms;
 }
 
 .mb-flip.in {
 	animation-name: flipintoright;
-	animation-duration: 500ms;
 }
 
 .mb-flip.out.reverse {

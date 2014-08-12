@@ -1,22 +1,22 @@
-@keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes fadeout {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
+@keyframes fadein 
+    from 
+      opacity: 0
+    to 
+      opacity: 1
 
-/* Be sure to use the shorthand, or something weird may happen (I don't know why) */
-.mb-fade.out {
-    animation-name: fadeout;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
+@keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
 
-.mb-fade.in {
-    animation-name: fadein;
-    animation-duration: 1s;
-    animation-delay: .8s;
-    animation-fill-mode: both;
-}
+/* animation-fill-mode is a must, or it sucks in UC browser */
+.mb-fade
+  animation-fill-mode: both
+  &.out
+    animation-name: fadeout
+    animation-duration: fade-out-duration
+  &.in
+    animation-name: fadein
+    animation-duration: fade-in-duration
+    animation-delay: fade-in-delay

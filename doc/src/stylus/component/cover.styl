@@ -1,0 +1,24 @@
+/* cover in */
+.mb-cover
+  animation-timing-function: ease
+  animation-duration: cover-duration
+  animation-fill-mode: both
+  &.in
+    animation-name: coverInFromRight
+    z-index: 10
+    &.reverse
+      animation-name: coverInFromLeft
+  &.out
+    z-index: 1
+    
+@keyframes coverInFromLeft
+  from
+    transform: translate3d(-100%, 0, 0)
+  to
+    transform: translate3d(0, 0, 0)
+
+@keyframes coverInFromRight
+  from
+    transform: translate3d(100%, 0, 0)
+  to
+    transform: translate3d(0, 0, 0)

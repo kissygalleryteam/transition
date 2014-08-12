@@ -1,0 +1,126 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.viewContainer {
+  float: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.view {
+  height: 100%;
+  color: #e8e8e8;
+}
+#view1 .view-header {
+  background-color: #56a00e;
+}
+#view2 .view-header {
+  background-color: #2c3e50;
+}
+#view3 .view-header {
+  background-color: #2980b9;
+}
+.view-header {
+  position: relative;
+  height: 10%;
+  padding: 0 20px;
+  font-size: 3em;
+}
+.view-header .num {
+  display: inline-block;
+  float: right;
+  color: #edd552;
+}
+.view-body {
+  position: relative;
+  height: 90%;
+  width: 70;
+  margin-left: 30%;
+}
+.vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+.menu {
+  float: left;
+  width: 30%;
+  height: 90%;
+  background: #eee linear-gradient(#fff, #ddd);
+  border-right: 1px solid #ccc;
+}
+.menu ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #ccc;
+}
+.menu-item {
+  position: relative;
+  list-style-type: none;
+  border-bottom: 1px solid #ccc;
+  background-color: #eee;
+  background-image: linear-gradient(#fff, #f1f1f1);
+  padding: 0.5em;
+  color: #333;
+  font-size: 1.5em;
+}
+.menu-item:hover {
+  cursor: pointer;
+  background-color: #aaa;
+  background-image: linear-gradient(#f0f0f0, #ddd);
+}
+.menu-item.selected {
+  background-color: #333;
+  background-image: linear-gradient(#444, #2d2d2d);
+  color: #eee;
+}
+.menu-item .nav-right {
+  display: inline-block;
+  background-image: url("../img/nav-right.png");
+  height: 1em;
+  width: 1.2em;
+  position: absolute;
+  top: 1em;
+  margin-top: -0.25em;
+  right: 0.2em;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 100%;
+}
+.btnGroup {
+  text-align: center;
+}
+.btnNext,
+.btnPrev {
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 17px;
+  background: #f0f0f0 linear-gradient(#fff, #f1f1f1);
+  font-size: 1.3em;
+  box-shadow: 1px 1px 2px #ddd;
+}
+.btnNext:hover,
+.btnPrev:hover {
+  background-color: #aaa;
+  background-image: linear-gradient(#f0f0f0, #ddd);
+}
+.btnNext:focus,
+.btnPrev:focus {
+  outline: none;
+}
+.btnNext {
+  margin-right: 20px;
+}
+.btnAnimationType {
+  margin-right: 5px;
+}
