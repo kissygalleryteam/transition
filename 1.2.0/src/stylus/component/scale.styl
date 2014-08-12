@@ -1,0 +1,23 @@
+.mb-scaleY
+  animation-fill-mode: both
+  animation-duration: scale-duration
+  &.in
+    animation-name: scaleYIn
+    &.reverse
+      animation-name: scaleYIn
+  &.out
+    animation-name: scaleYOut
+    &.reverse
+      animation-name: scaleYOut
+
+@keyframes scaleYIn
+  from
+    transform scaleY(0)
+  to
+    transform scaleY(1)
+
+@keyframes scaleYOut
+  from
+    transform scaleY(1)
+  to
+    transform scaleY(0)

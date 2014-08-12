@@ -1,0 +1,22 @@
+@keyframes fadein 
+    from 
+      opacity: 0
+    to 
+      opacity: 1
+
+@keyframes fadeout
+    from
+      opacity: 1
+    to
+      opacity: 0
+
+/* animation-fill-mode is a must, or it sucks in UC browser */
+.mb-fade
+  animation-fill-mode: both
+  &.out
+    animation-name: fadeout
+    animation-duration: fade-out-duration
+  &.in
+    animation-name: fadein
+    animation-duration: fade-in-duration
+    animation-delay: fade-in-delay

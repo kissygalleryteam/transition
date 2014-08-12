@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Transition</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.4/seed-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+    <link href="../build/transition.css" rel="stylesheet">
+    <link href="resource/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="viewContainer">
+    <div id="view1" class="view mb-anim-view-active mb-anim-view">
+        <div class="view-header">
+            <div class="vertical-align">
+                View<span class="num">#1</span>
+            </div>
+        </div>
+        <aside class="menu">
+            <ul>
+                <li class="menu-item menu-slide selected" data-type="slide">Slide<div class="nav-right"></div></li>
+                <li class="menu-item menu-flip" data-type="flip">Flip<div class="nav-right"></div></li>
+                <li class="menu-item menu-fade" data-type="fade">Fade<div class="nav-right"></div></li>
+                <li class="menu-item menu-cover" data-type="cover">Cover<div class="nav-right"></div></li>
+                <li class="menu-item menu-scaleY" data-type="scaleY">fold<div class="nav-right"></div></li>
+            </ul>
+        </aside>
+        <div class="view-body">
+            <div class="btnGroup vertical-align">
+                <button class="btnNext">Next</button>
+                <button class="btnPrev">Prev</button>
+            </div>
+        </div>
+    </div>
+    <div id="view2" class="view mb-anim-view">
+        <div class="view-header">
+            <div class="vertical-align">
+                View<span class="num">#2</span>
+            </div>
+        </div>
+        <aside class="menu">
+            <ul>
+                <li class="menu-item menu-slide selected" data-type="slide">Slide<div class="nav-right"></div></li>
+                <li class="menu-item menu-flip" data-type="flip">Flip<div class="nav-right"></div></li>
+                <li class="menu-item menu-fade" data-type="fade">Fade<div class="nav-right"></div></li>
+                <li class="menu-item menu-cover" data-type="cover">Cover<div class="nav-right"></div></li>
+                <li class="menu-item menu-scaleY" data-type="scaleY">fold<div class="nav-right"></div></li>
+            </ul>
+        </aside>
+        <div class="view-body">
+            <div class="btnGroup vertical-align">
+                <button class="btnNext">Next</button>
+                <button class="btnPrev">Prev</button>
+            </div>
+        </div>
+    </div>
+    <div id="view3" class="view mb-anim-view">
+        <div class="view-header">
+            <div class="vertical-align">
+                View<span class="num">#3</span>
+            </div>
+        </div>
+        <aside class="menu">
+            <ul>
+                <li class="menu-item menu-slide selected" data-type="slide">Slide<div class="nav-right"></div></li>
+                <li class="menu-item menu-flip" data-type="flip">Flip<div class="nav-right"></div></li>
+                <li class="menu-item menu-fade" data-type="fade">Fade<div class="nav-right"></div></li>
+                <li class="menu-item menu-cover" data-type="cover">Cover<div class="nav-right"></div></li>
+                <li class="menu-item menu-scaleY" data-type="scaleY">fold<div class="nav-right"></div></li>
+            </ul>
+        </aside>
+        <div class="view-body">
+            <div class="btnGroup vertical-align">
+                <button class="btnNext">Next</button>
+                <button class="btnPrev">Prev</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var S = KISSY;
+    S.config({
+        packages: [
+            {
+                name: "kg",
+                path: "http://g.tbcdn.cn/kg/",
+                charset: "utf-8",
+                ignorePackageNameInUri: true
+            }
+        ],
+        debug: true
+    });
+
+    if (S.Config.debug) {
+        var srcPath = "../";
+        S.config({
+            packages: [
+                {
+                    name: "kg/transition/1.0.0",
+                    path: srcPath,
+                    charset: "utf-8",
+                    ignorePackageNameInUri: true
+                }
+            ]
+        });
+    }
+
+    S.use('kg/transition/1.0.0/index,event,node', function (S, Transition, Event, Node) {
+        var view1 = document.getElementById('view1');
+        var view2 = document.getElementById('view2');
+        var view3 = document.getElementById('view3');
+
+        var transition = new Transition();
+        var animationType = 'slide';
+        var curViewIdx = 0;
+        var nextViewIdx;
+        var selectors = ['#view1', '#view2', '#view3'];
+        var $ = Node.one;
+        var $$ = Node.all;
+        
+        Event.on('.menu-item', 'click', function() {
+            $$('.menu-' + animationType).removeClass('selected');
+            var $curMenu = $(this);
+            animationType = $curMenu.attr('data-type');
+            $$('.menu-' + animationType).addClass('selected');
+        });
+
+        Event.on(document.querySelectorAll('.btnNext'), 'click', function (e) {
+
+            var next = view1.getElementsByClassName('next');
+            next.textContent = Number(next.textContent) + 1;
+
+            // 须加此判断，否切换过快会出现问题
+            if (transition.isTransitioning) {
+                console.log('isTransitioning');
+                return;
+            }
+            if (curViewIdx === selectors.length - 1) {
+                nextViewIdx = 0;
+            } else {
+                nextViewIdx = curViewIdx + 1;
+            }
+            location.assign(location.href.replace(/#.*$/, '') + '#' + selectors[curViewIdx] + '/' + selectors[nextViewIdx]);
+
+            curViewIdx = (curViewIdx + 1) % selectors.length;
+        });
+        Event.on(document.querySelectorAll('.btnPrev'), 'click', function () {
+
+            // 必须加此判断，否切换过快会出现问题
+            if (transition.isTransitioning) {
+                console.log('isTransitioning');
+                return;
+            }
+            if (curViewIdx === 0) {
+                curViewIdx = 2;
+                nextViewIdx = 0;
+            } else {
+                curViewIdx--;
+                nextViewIdx = curViewIdx + 1;
+            }
+
+            location.assign(location.href.replace(/#.*$/, '') + '#reverse-' + selectors[curViewIdx] + '/' + selectors[nextViewIdx]);
+        });
+
+        Event.on(window, 'hashchange', function (e) {
+            var m = location.hash.match(/^#(reverse-)?([^\/]+)\/([^\/]+)$/);
+            if (!m) { return; }
+            //animationType = getAnimType();
+
+            transition.transition({
+                transition: animationType,
+                fromView: m[2],
+                toView: m[3],
+                container: '.viewContainer',
+                reverse: m[1],
+                showToViewDelay: animationType === 'scaleY'
+            });
+            transition.on(animationType + 'End', function() {
+                console.log(animationType + 'End');
+                transition.detach(animationType + 'End');
+            })
+        });
+    })
+</script>
+</body>
+</html>

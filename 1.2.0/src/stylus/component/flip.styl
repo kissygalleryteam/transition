@@ -1,0 +1,47 @@
+.mb-flip-container {
+	perspective: 1000px;
+	position: absolute;
+}
+.mb-flip {
+	backface-visibility: hidden;
+	transform: translateX(0);
+  animation-duration: flip-duration
+}
+
+.mb-flip.out {
+	transform: rotateY(-180deg);
+	animation-name: flipouttoleft;
+}
+
+.mb-flip.in {
+	animation-name: flipintoright;
+}
+
+.mb-flip.out.reverse {
+	transform: rotateY(180deg);
+	animation-name: flipouttoright;
+}
+
+.mb-flip.in.reverse {
+	animation-name: flipintoleft;
+}
+
+@keyframes flipouttoleft {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(-180deg); }
+}
+
+@keyframes flipouttoright {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(180deg); }
+}
+
+@keyframes flipintoleft {
+    from { transform: rotateY(-180deg); }
+    to { transform: rotateY(0); }
+}
+  
+@keyframes flipintoright {
+    from { transform: rotateY(180deg); }
+    to { transform: rotateY(0); }
+}
